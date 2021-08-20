@@ -1,0 +1,207 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv('E:\data science shan project\zomato.csv')
+
+df.head()
+
+df.shape
+
+df.isnull().sum()
+
+feature_na = []
+for feature in df.columns:
+    if df[feature].isnull().sum() >1:
+        feature_na.append(feature)
+feature_na
+
+[feature for feature in df.columns if df[feature].isnull().sum()>1]
+
+# to check missing value %
+
+for i in feature_na:
+    print('{} has {}% missing value'.format(i,np.round(df[i].isnull().sum()/len(df)*100, 3)))
+
+df.info()
+
+df['approx_cost(for two people)'].unique()
+
+df['approx_cost(for two people)'].dtypes
+
+df[df['approx_cost(for two people)'].isnull()]
+
+df['approx_cost(for two people)'].unique()
+
+def remt(yo):
+    return yo.replace(',','')
+
+df['approx_cost(for two people)'] = df['approx_cost(for two people)'].astype(str)
+
+df['approx_cost(for two people)'] = df['approx_cost(for two people)'].apply(remt)
+
+df['approx_cost(for two people)'].astype(str)
+
+df.head(2)
+
+df['rate'].unique()
+
+def rem(x):
+    return x.remove('/','')
+
+df['approx_cost(for two people)'].apply(lambda x: x.replace(',',''))
+
+df['approx_cost(for two people)'] = df['approx_cost(for two people)'].astype(float)
+
+df['approx_cost(for two people)'].dtype
+
+df['rate'].dtype
+
+df['rate'].unique
+
+df['rate'].isnull().sum()
+
+df['rate'].unique()
+
+df['rate'][0].split('/')[0]
+
+df['rate']= df['rate'].astype(str).apply(lambda x: x.split('/')[0])
+
+def new(x):
+    return x.split('/')[0]
+
+df['rate'] = df['rate'].astype(str).apply(new)
+
+df['rate']
+
+
+
+
+
+
+
+
+
+
+
+df['rate'].unique()
+
+df['rate'] = df['rate'].replace('-','0')
+
+df['rate'].unique()
+
+df['rate'] = df['rate'].replace('NEW','0')
+
+df['rate'].unique()
+
+df['rate'] = df['rate'].astype(float)
+
+df['rate'].dtype
+
+df['rate']
+
+df['rate'].nunique()
+
+df.head(1)
+
+df['rest_type'].value_counts()
+
+px.bar(data_frame=df,
+    x=df['rest_type'].value_counts().nlargest(20).index,
+    y=df['rest_type'].value_counts().nlargest(20))
+
+import plotly.express as px
+
+def full(x):
+    if x in ('Quick Bites','Casual Dining'):
+        return 'total Quick Bites + Casual Dining'
+    else:
+        return 'Others'
+
+df['rest_data']= df['rest_type'].apply(full)
+
+df['rest_data'].value_counts().index
+
+
+
+df['rest_data'].value_counts()
+
+import plotly.express as px
+
+px.pie(data_frame=df,
+    names=df['rest_data'].value_counts().index,
+    values=df['rest_data'].value_counts())
+
+df.head(2)
+
+ df.groupby('name').agg({'rate':'mean'})
+
+pd.DataFrame(x)
+
+df.columns
+
+rest = df.groupby('name').agg({'votes':'sum','url': 'count','approx_cost(for two people)': 'mean', 'rate':'mean'}).reset_index()
+
+rest.head(1)
+
+rest.rename(columns={'name': 'Name',  'votes': 'total votes', 'url': 'total unitites', 'approx_cost(for two people)': 'approx_avg_cost','rate': 'avg rating' },inplace = True)
+
+rest
+
+rest.rename(columns = {'Name': 'restaurant_name'}, inplace = True)
+
+rest['votes per unity'] =rest['total votes']/rest['total unitites']
+
+rest
+
+popular = rest.sort_values(by = 'total unitites', ascending = False)
+
+popular
+
+a = '1st', '2nd'
+
+aa = pd.DataFrame(a)
+
+aa.head()
+
+aa.columns = ['rank']
+
+aa
+
+aa= aa.rename(columns = {'rank': 'rankkss'})
+
+aa= pd.DataFrame(aa)
+
+aa
+
+aa = aa['rankkss'].map({1:11,2:22})
+
+aa.columns
+
+aa = aa['rankkss'].fillna(2)
+
+
+
+
+
+aa =pd.DataFrame(aa)
+
+aa
+
+aa['rankkss'].iloc[0:1].replace(10, 100, inplace = True)
+
+aa
+
+
+
+
+
+
+
+
+
+aa = aa['rankkss'].str[:-2]
+
+aa.head()
+
